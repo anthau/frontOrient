@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from "jquery";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button,Form } from 'react-bootstrap';
+import {Modal, Button,Form,Alert } from 'react-bootstrap';
 
 
 
@@ -15,17 +15,37 @@ class AddRoute extends React.Component {
 
 
     this.textInput = React.createRef();
+    this.textRoute = React.createRef();
 
     this.state = {
       value: null,
     };
   }
+  deleteRoute(e)  {
+	var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://192.168.99.100/api/oBackEnd/webresources/generic",
+  "method": "DELETE",
+  "headers": {
+    "Content-Type": "application/json",
+    "cache-control": "no-cache",
+    "Postman-Token": "e64991d8-7c2c-4e50-ba2b-7ac3a9cc36b0"
+  },
+  "processData": false,
+  "data": "{\"id\":53,\"name\":\"testssss\"}"
+}
+
+$.ajax(settings).done(function (response) {
+  alert(response);
+});
+  }
   
   send(e)  {
-
-  	alert(this.textInput.current.value);
+  
+  	alert(this.textRoute.current.value);
 	var data = JSON.stringify({
-  		"name": "testssss",
+  		"name": this.textRoute.current.value,
  		 "city": this.textInput.current.value
 	});
 
@@ -59,10 +79,11 @@ class AddRoute extends React.Component {
     return( 
  	<div>
 
+
     <Form>
    <Form.Group controlId="formBasicEmail">
     <Form.Label><b>Route name</b></Form.Label>
-    <Form.Control id="name" type="text" placeholder="easy 2"  ref="name"/>
+    <Form.Control id="name" type="text" placeholder="easy 2"  ref={this.textRoute}/>
     <Form.Text className="text-muted">
       <b>Add Route</b>
     </Form.Text>
@@ -81,6 +102,12 @@ class AddRoute extends React.Component {
 	       <Button variant="primary" onClick={this.send.bind(this)} type="submit">
 	           Add route
   </Button>
+  <br/>
+  
+  	       <Button variant="danger" onClick={this.deleteRoute.bind(this)} type="submit">
+	           Delete route
+  </Button>
+
 
 	       </div>
 

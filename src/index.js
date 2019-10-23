@@ -6,6 +6,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import Welcome from  './Welcome'
+import AddRoute from  './AddRoute'
+import About from  './About'
+
 
 import {
   BrowserRouter as Router,
@@ -20,32 +23,6 @@ import App from './App'
 import * as serviceWorker from './serviceWorker';
 
 
-/* class Welcome extends React.Component {
-
-
-  constructor(props) {
-    super(props);
-
-
-fetch('http://192.168.99.100/api/oBackEnd/webresources/generic'    , {method: "PUT"}).then(function(response) {
-	alert("test=" +JSON.stringify(response));
-});
-
-    this.state = {
-      value: null,
-    };
-  }
-
- render() {
-    return <h1>Hello, {this.props.name}</h1>;
-  }
-} */
-
-function About() {
-return (
-<h1>Jes</h1>
-)
-}
 function Ex() {
 return (
   <Router>
@@ -54,6 +31,11 @@ return (
     </div>
     <div>
       <Route path="/about" component={About} />
+    </div>
+
+
+    <div>
+      <Route path="/AddRoute" component={AddRoute} />
     </div>
   </Router>
 
