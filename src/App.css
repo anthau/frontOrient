@@ -49,11 +49,13 @@ color : black
 }
 
 @media screen and (max-width: 700px) {
-  .topnav a {display: none;}
+.Logo  {display: none;}  
+ .topnav a {display: none;}
   .topnav a.icon {
     float: left;
     display: block;
   }
+     b  { font-size:20px}
     body {
     background-color: lightblue;
   }

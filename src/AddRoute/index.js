@@ -129,6 +129,7 @@ class AddRoute extends React.Component {
      	  <div class="col-sm-4">
         	  <img
               src={Logo}
+	      class="Logo"
               style={{ height: 480, width: 480 }}
               alt="website logo"
             /> 

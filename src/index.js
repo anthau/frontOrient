@@ -8,7 +8,7 @@ import './index.css'
 import Welcome from  './Welcome'
 import AddRoute from  './AddRoute'
 import About from  './About'
-
+import AddCheckpoint from  './AddCheckpoint'
 
 import {
   BrowserRouter as Router,  
@@ -27,7 +27,9 @@ return (
     <div>
       <Route path="/about" component={About} />
     </div>
-
+   <div>
+      <Route path="/AddCheckpoint" component={AddCheckpoint} />
+    </div>
 
     <div>
       <Route path="/AddRoute" component={AddRoute} />
