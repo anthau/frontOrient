@@ -11,15 +11,10 @@ import About from  './About'
 
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
+  BrowserRouter as Router,  
+  Route,  
 } from "react-router-dom";
 
-import App from './App'
 import * as serviceWorker from './serviceWorker';
 
 
@@ -43,26 +38,6 @@ return (
 
 }
 
-
-class Routing extends React.Component {
-
-
-  constructor(props) {
-    super(props);
-}
- render()  {
- 
-  return(
-<Router>
- <Switch>
-          <Route path="/">
-            <ex />
-          </Route>
-        </Switch>
-    </Router>
-)
-}
-}
 
 
 

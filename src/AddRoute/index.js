@@ -1,9 +1,7 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import $ from "jquery";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Modal, Button,Form,Alert } from 'react-bootstrap';
-
+import {Button,Form} from 'react-bootstrap';
 
 
 
@@ -20,6 +18,36 @@ class AddRoute extends React.Component {
     this.state = {
       value: null,
     };
+    
+    alert('tappara3') 
+    
+    	var data = JSON.stringify({});
+
+	var xhr = new XMLHttpRequest();
+	xhr.withCredentials = true;
+
+	xhr.addEventListener("readystatechange", function () {
+	  if (this.readyState === 4) {
+    	alert(this.responseText);
+  	}
+  });
+
+  xhr.open("GET", "http://192.168.99.100/api/oBackEnd/webresources/generic");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("User-Agent", "PostmanRuntime/7.18.0");
+  xhr.setRequestHeader("Accept", "*/*");
+  xhr.setRequestHeader("Cache-Control", "no-cache");
+  xhr.setRequestHeader("Postman-Token", "f73441d8-4e76-4279-88bf-b3b41f61c033,f08ded73-7f78-4202-a38f-4649b13fa2af");
+  xhr.setRequestHeader("Host", "192.168.99.100");
+  xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
+  xhr.setRequestHeader("Content-Length", "38");
+  xhr.setRequestHeader("Connection", "keep-alive");
+  xhr.setRequestHeader("cache-control", "no-cache");
+
+  xhr.send(data);  
+
+    
+
   }
   deleteRoute(e)  {
 	var settings = {
@@ -80,6 +108,7 @@ $.ajax(settings).done(function (response) {
  	<div>
 
 
+
     <Form>
    <Form.Group controlId="formBasicEmail">
     <Form.Label><b>Route name</b></Form.Label>
@@ -95,14 +124,21 @@ $.ajax(settings).done(function (response) {
     </Form.Text>
 
    
-
     
   </Form.Group>
 	    </Form>
 	       <Button variant="primary" onClick={this.send.bind(this)} type="submit">
-	           Add route
+	           Add routes
   </Button>
   <br/>
+  
+  <select class="browser-default custom-select">
+  	<option selected>Open this select menu</option>
+  	<option value="1">One</option>
+  	<option value="2">Two</option>
+  	<option value="3">Three</option>
+  </select>
+
   
   	       <Button variant="danger" onClick={this.deleteRoute.bind(this)} type="submit">
 	           Delete route
