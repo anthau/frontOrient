@@ -126,14 +126,6 @@ class AddRoute extends React.Component {
 
     return( 
     <div class="row">
-     	  <div class="col-sm-4">
-        	  <img
-              src={Logo}
-	      class="Logo"
-              style={{ height: 480, width: 480 }}
-              alt="website logo"
-            /> 
-     	  </div>
  	  <div class="col-sm-4">
 			<Form>
 			    <Form.Group controlId="formBasicEmail">
@@ -171,6 +163,15 @@ class AddRoute extends React.Component {
 
 
 	       </div>
+
+          <div class="col-sm-4">
+                  <img
+              src={Logo}
+              class="Logo"
+              style={{ height: 480, width: 480 }}
+              alt="website logo"
+            />
+          </div>
 	       </div>
 
     )
