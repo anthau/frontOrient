@@ -18,9 +18,11 @@ class DeleteRoute extends React.Component {
            this.state = {
       			value: null,
       			routes  :  [ ],
+      			maps1  :  [ ],
       			cities  :  [ ]
     		};
     		this.getCities();
+    		this.getMaps();
            
      
   }
@@ -29,9 +31,40 @@ class DeleteRoute extends React.Component {
   
   
   }
+  
+   getMaps()   {
+  		
+
+     	var settings = {
+			"crossDomain": true,
+  			"url": "http://192.168.99.100/api/oBackEnd/webresources/generic/Maps",
+ 	 		"method": "GET",
+  			"headers": {
+    			"Content-Type": "application/json",
+    			"Accept": "*/*"
+  			}}
+  			
+  			var t=this;
+
+			$.ajax(settings).done(function (response) {
+				
+				let maps=[];
+				response.map(term=>maps.push(<option value={term} key="1" >{term}</option>) )
+		        t.setState({ maps1  : maps});
+		
+				 /*const result = response.filter(route => route.city === "Tampere");
+				 let routesArray=[];
+				 result.map(route=>routesArray.push(<option value={route.id} key="1" >{route.name}</option>))
+				 t.setState({ routes  : routesArray});
+				 */
+			});
+				 			
+
+  }
+
   getCities()   {
   		
-  
+
      	var settings = {
 			"crossDomain": true,
   			"url": "http://192.168.99.100/api/oBackEnd/webresources/generic/cities",
@@ -60,9 +93,6 @@ class DeleteRoute extends React.Component {
   }
   
     deleteRoute1()  {
-    
-
-    	
       	var settings = {
 			"crossDomain": true,
   			"url": "http://192.168.99.100/api/oBackEnd/webresources/generic",
@@ -102,8 +132,8 @@ class DeleteRoute extends React.Component {
   			
   			 <select   class="browser-default custom-select">
         		    <option value="" selected disabled hidden>Select Map</option>
-        		   <option value="1" >Kauppi</option>
-  			</select>
+        		    {this.state.maps1}
+        		   </select>
   			
   		     <select   class="browser-default custom-select"  ref={ this.deleteUusi} >
         		    <option value="" selected disabled hidden>Route</option>

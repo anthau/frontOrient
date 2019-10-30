@@ -12,6 +12,7 @@ class AddRoute extends React.Component {
     super(props);
     this.textInput = React.createRef();
     this.textRoute = React.createRef();
+       this.map = React.createRef();
     
     this.deleteRoute= React.createRef();
 
@@ -22,30 +23,6 @@ class AddRoute extends React.Component {
     
   }
   
-  deleteRoute1(e)  {
-  
- 
-	var settings = {
-  		"async": true,
- 		 "crossDomain": true,
-  		 "url": "http://192.168.99.100/api/oBackEnd/webresources/generic",
-  		 "method": "DELETE",
-  		 "headers": {
-    	 	"Content-Type": "application/json",
-    		"cache-control": "no-cache",
-    		"Postman-Token": "e64991d8-7c2c-4e50-ba2b-7ac3a9cc36b0"
-  		},
-  		
-  		"processData": false,
-  		"data": "{\"id\":"+ this.deleteRoute.current.value +" ,\"name\":\"testssss\"}"
-		}
-
-	$.ajax(settings).done(function (response) {
-	  	alert(response);
-	});  
-	alert('jes=' + this.deleteRoute.current.value)
-	window.location.reload();
-  }
   
   componentDidMount()  {
   	var xhr = new XMLHttpRequest();
@@ -93,7 +70,9 @@ class AddRoute extends React.Component {
   	alert(this.textRoute.current.value);
 	var data = JSON.stringify({
   		"name": this.textRoute.current.value,
- 		 "city": this.textInput.current.value
+ 		 "city": this.textInput.current.value,
+ 		  "map": this.map.current.value
+
 	});
 
 	var xhr = new XMLHttpRequest();
@@ -126,6 +105,13 @@ class AddRoute extends React.Component {
 
     return( 
     <div class="row">
+     	  <div class="col-sm-4">
+        	  <img
+              src={Logo}
+              style={{ height: 480, width: 480 }}
+              alt="website logo"
+            /> 
+     	  </div>
  	  <div class="col-sm-4">
 			<Form>
 			    <Form.Group controlId="formBasicEmail">
@@ -137,11 +123,21 @@ class AddRoute extends React.Component {
     			<hr/>
     
         <Form.Label><b>City</b></Form.Label>
-    <Form.Control type="text" placeholder="Tampere" ref={this.textInput} />
+    <Form.Control type="text" placeholder="City" ref={this.textInput} />
     <Form.Text className="text-muted">
       <b>Add City</b>
-      	<hr class="hr"/>
+      	<hr/>
     </Form.Text>
+    
+    
+     <Form.Label><b>Map</b></Form.Label>
+    <Form.Control type="text" placeholder="Map" ref={this.map} />
+    <Form.Text className="text-muted">
+      <b>Add City</b>
+      	<hr/>
+    </Form.Text>
+
+
 
    
     
@@ -152,26 +148,11 @@ class AddRoute extends React.Component {
   </Button>
   <br/>
   
-  <select ref={this.deleteRoute}  class="browser-default custom-select">
-	{this.state.Routes} 
-  </select>
-
+ 
   
-  	       <Button variant="danger"  onClick={this.deleteRoute1.bind(this)} type="submit">
-	           Delete route
-  </Button>
-
+ 
 
 	       </div>
-
-          <div class="col-sm-4">
-                  <img
-              src={Logo}
-              class="Logo"
-              style={{ height: 480, width: 480 }}
-              alt="website logo"
-            />
-          </div>
 	       </div>
 
     )
