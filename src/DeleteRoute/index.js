@@ -94,7 +94,7 @@ class DeleteRoute extends React.Component {
 			$.ajax(settings).done(function (response) {
 				let result = response.filter(route => route.city ===t.city1.current.value).filter(route => route.map ===t.map2.current.value);
 				alert(JSON.stringify(result ))
-				let routesArray=[];
+				let routesArray=[ <option value="" selected disabled hidden>Route</option>];
  				let check=[];
 				result.map(route=>routesArray.push(<option value={route.id}  >{route.name}</option>));
 				t.setState({ routes : routesArray});
@@ -128,7 +128,7 @@ class DeleteRoute extends React.Component {
 			$.ajax(settings).done(function (response) {
 				let result = response.filter(route => route.city ===t.city1.current.value);
 				//alert(JSON.stringify(new Set(Object.keys(result )))
- 				let routesArray=[];
+ 				let routesArray=[ <option value="" selected disabled hidden>Select map</option>];
  				let check=[];
 				result.map(route=>{
 									if(check.indexOf(route.map)<0)
