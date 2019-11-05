@@ -17,36 +17,52 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 export default class AddCheckpoint extends React.Component {
+  
+   
+  lat="-";
+  lon="h";
 
   send(e) {
-    alert('22')
+    alert('22='  + this.lat)
   }
 
   saveCoord(e) {
     const { lat, lng } = e.latlng;
-    alert('222=' + lat)
+    this.lat=lat;
+    this.lon=lng;
+
+    alert('testi=' + lng);
+    this.forceUpdate();
   }
   render() {
+
+
     return (
       <div class="row">
         <div class="col-sm-4">
-          <Map center={position} zoom={13} onclick={this.saveCoord}>>
-    <TileLayer
+          <Map center={position} zoom={13} onclick={this.saveCoord.bind(this)}>>
+           <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             />
             <Marker position={position}>
-              <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+              <Popup>3-4</Popup>
             </Marker>
           </Map>
         </div>
 
-        <div class="col-sm-4">                                                                                                   <p>div</p>
+        <div class="col-sm-4"> 
+          <fieldset>
+            <p>Lat {this.lat}  </p>
+            <p>Lon {this.lon}  </p>
+            </fieldset>
+                                                                                                  
           <div class="card card1"  >
-            <fieldset>
+
             <div class="card-body"  >
-              Coordinates unset
+          
           </div>
+          
  
           <div class="card" style={{ backgroundColor: "#00FF80" }}>
             <div class="card-body"  >
@@ -58,13 +74,14 @@ export default class AddCheckpoint extends React.Component {
 
 
           <form>
+       
             <div class="form-group">
               <input type="text" class="form-control" id="exampleInputPassword1" placeholder="name" />
 
             </div>
           </form>
           <button type="button" onClick={this.send} class="btn btn-primary">Save checkpoint1</button>
-          </fieldset>
+
           </div>
         </div>
       </div>
