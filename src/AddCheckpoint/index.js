@@ -2,6 +2,9 @@ import React from 'react';
 
 
 import { render } from 'react-dom'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+ 
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import './../App.css';
@@ -17,21 +20,71 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 export default class AddCheckpoint extends React.Component {
-  
-   
-  lat="-";
-  lon="h";
+
+
+  lat = "-";
+  lon = "-";
+  name = React.createRef();
+  selected = "card card2"
+  markers = [];
 
   send(e) {
-    alert('22='  + this.lat)
+
+
+    confirmAlert({
+      title: 'info',
+      message: 'Tiedot lähetetty',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => alert('Click Yes')
+        },
+      
+      ]
+    });
+
+    this.selected = "card card2"
+    var data = JSON.stringify({
+      "lat": this.lat,
+      "lon": this.lon,
+      "name": this.name.current.value
+    });
+
+    this.lat = "-";
+    this.lon = "-";
+
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === 4) {
+        console.log(this.responseText);
+      }
+    });
+
+    xhr.open("PUT", "http://192.168.99.100/api/oBackEnd/webresources/checkpoint");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.setRequestHeader("Accept", "*/*");
+    xhr.setRequestHeader("Cache-Control", "no-cache");
+    xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
+    xhr.setRequestHeader("Content-Length", "34");
+    xhr.setRequestHeader("Connection", "keep-alive");
+    xhr.setRequestHeader("cache-control", "no-cache");
+    xhr.send(data);
+    this.forceUpdate();
   }
 
   saveCoord(e) {
     const { lat, lng } = e.latlng;
-    this.lat=lat;
-    this.lon=lng;
+    this.lat = lat;
+    this.lon = lng;
+    this.markers.push(<Marker key="1" position={position}><Popup>3-4</Popup></Marker>)
 
     alert('testi=' + lng);
+    this.selected = "card card1"
     this.forceUpdate();
   }
   render() {
@@ -45,46 +98,39 @@ export default class AddCheckpoint extends React.Component {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             />
-            <Marker position={position}>
-              <Popup>3-4</Popup>
-            </Marker>
+            {this.markers}
+
           </Map>
         </div>
 
-        <div class="col-sm-4"> 
-          <fieldset>
-            <p>Lat {this.lat}  </p>
-            <p>Lon {this.lon}  </p>
+        <div class="col-sm-4">
+          <div style={{marginTop:"80px"}}>
+            <div class={this.selected}  >
+
+              <div class="card-body">
+
+                <p class="card-text"> coordinates are set  </p>
+
+              </div>
+            </div>
+            <fieldset>
+              <p>Lat {this.lat}  </p>
+              <p>Lon {this.lon}  </p>
             </fieldset>
-                                                                                                  
-          <div class="card card1"  >
-
-            <div class="card-body"  >
-          
-          </div>
-          
- 
-          <div class="card" style={{ backgroundColor: "#00FF80" }}>
-            <div class="card-body"  >
-              Coordinates set.
-            </div>
-          </div>
 
 
 
-
-          <form>
-       
-            <div class="form-group">
-              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="name" />
-
-            </div>
-          </form>
-          <button type="button" onClick={this.send} class="btn btn-primary">Save checkpoint1</button>
-
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="name" ref={this.name} />
+              </div>
+            </form>
+            <button type="button" onClick={this.send.bind(this)} class="btn btn-primary">Save checkpoint1</button>
           </div>
         </div>
       </div>
+
+
     );
   }
 }

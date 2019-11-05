@@ -18,6 +18,11 @@ color : black
 background-Color: #58ACFA
 }
 
+.card2  {
+background-Color: #00FF80
+}
+
+
 .leaflet-container {
   height: 400px;
   width: 100%;
