@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import { render } from 'react-dom'
+
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
  
@@ -28,39 +28,24 @@ export default class AddCheckpoint extends React.Component {
   selected = "card card2"
   markers = [];
 
-  send(e) {
+  sendData()  {
 
-
-    confirmAlert({
-      title: 'info',
-      message: 'Tiedot lähetetty',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => alert('Click Yes')
-        },
-      
-      ]
-    });
-
+ 
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
     this.selected = "card card2"
-    var data = JSON.stringify({
+    let data = JSON.stringify({
       "lat": this.lat,
       "lon": this.lon,
       "name": this.name.current.value
     });
-
     this.lat = "-";
     this.lon = "-";
-
-
-
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-
     xhr.addEventListener("readystatechange", function () {
+     
+
       if (this.readyState === 4) {
-        console.log(this.responseText);
+        alert(this.responseText);
       }
     });
 
@@ -77,13 +62,43 @@ export default class AddCheckpoint extends React.Component {
     this.forceUpdate();
   }
 
+  send(e) {
+
+
+    confirmAlert({
+      title: 'Checkpoint name=' + this.name.current.value,
+      message: 'Do you want to send messages? ',
+     
+      buttons: [
+        {
+          label: 'Send 1data',
+          onClick: () =>{
+
+            this.sendData();
+            alert('Data saved')
+          }
+        },
+
+        {
+          label: "cancel",
+          onClick: () => alert('Save cancelled')
+        },
+      
+      ]
+    });
+
+  
+
+
+  }
+
   saveCoord(e) {
     const { lat, lng } = e.latlng;
     this.lat = lat;
     this.lon = lng;
     this.markers.push(<Marker key="1" position={position}><Popup>3-4</Popup></Marker>)
 
-    alert('testi=' + lng);
+    
     this.selected = "card card1"
     this.forceUpdate();
   }
@@ -92,16 +107,7 @@ export default class AddCheckpoint extends React.Component {
 
     return (
       <div class="row">
-        <div class="col-sm-4">
-          <Map center={position} zoom={13} onclick={this.saveCoord.bind(this)}>>
-           <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            />
-            {this.markers}
-
-          </Map>
-        </div>
+   
 
         <div class="col-sm-4">
           <div style={{marginTop:"80px"}}>
@@ -109,17 +115,14 @@ export default class AddCheckpoint extends React.Component {
 
               <div class="card-body">
 
-                <p class="card-text"> coordinates are set  </p>
+                <p class="card-text"> cqoordinates are set  </p>
 
               </div>
             </div>
             <fieldset>
-              <p>Lat {this.lat}  </p>
-              <p>Lon {this.lon}  </p>
+              <p>Lat1 {parseFloat(this.lat).toFixed(3)}  </p>
+              <p>Lon  {parseFloat(this.lon).toFixed(3)}  </p>
             </fieldset>
-
-
-
             <form>
               <div class="form-group">
                 <input type="text" class="form-control" id="exampleInputPassword1" placeholder="name" ref={this.name} />
@@ -127,6 +130,18 @@ export default class AddCheckpoint extends React.Component {
             </form>
             <button type="button" onClick={this.send.bind(this)} class="btn btn-primary">Save checkpoint1</button>
           </div>
+        </div>
+
+        <div class="col-sm-4">
+        <Map center={position} zoom={13} onclick={this.saveCoord.bind(this)}>>
+           <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+            />
+            {this.markers}
+
+          </Map>
+         
         </div>
       </div>
 
