@@ -27,6 +27,9 @@ return (
       <Route path="/test" component={Welcome} />
     </div>
     <div>
+      <Route path="/showRoutes" component={Welcome} />
+    </div>
+    <div>
       <Route path="/DeleteRoute" component={DeleteRoute} />
     </div>
     <div>
