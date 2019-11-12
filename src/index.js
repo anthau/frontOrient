@@ -10,7 +10,7 @@ import AddRoute from  './AddRoute'
 import About from  './About'
 import AddCheckpoint from  './AddCheckpoint'
 import DeleteRoute from  './DeleteRoute'
-
+import ShowRoutes from  './ShowCheckpoints'
 
 import {
   BrowserRouter as Router,  
@@ -27,7 +27,7 @@ return (
       <Route path="/test" component={Welcome} />
     </div>
     <div>
-      <Route path="/showRoutes" component={Welcome} />
+      <Route path="/showRoutes" component={ShowRoutes} />
     </div>
     <div>
       <Route path="/DeleteRoute" component={DeleteRoute} />
