@@ -3,11 +3,14 @@ import $ from "jquery";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import './../App.css'
+import Map1 from './../Map';
 
 export default class ShowRoutes extends React.Component {
+	
 	constructor(props) {
 		super(props);
 	}
+
 	componentDidMount() {
 
 		var data = JSON.stringify({});
@@ -44,8 +47,9 @@ export default class ShowRoutes extends React.Component {
 				<div class="col-sm-4">
 					<div>
 						<h1>Näytä reitti</h1>
+						<Map1/>	
 						<select class="form-control" id="sel1">
-							<option hidden >Choose route</option>
+							<option hidden >1Choose route1</option>
 							<option>1</option>
 							<option>2</option>
 
