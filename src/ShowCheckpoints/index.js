@@ -8,28 +8,39 @@ import Map1 from './../Map';
 export default class ShowRoutes extends React.Component {
 	
 	constructor(props) {
-		super(props);
+		super(props);		
+		this.state = {
+			marker: '-'
+	
+		  };
+		
+		//this.setState({ input: text })
 	}
 
 	componentDidMount() {
-
+		alert('lataa')
 		var data = JSON.stringify({});
 		var xhr = new XMLHttpRequest();
 		xhr.withCredentials = true;
+		var t=this;
 
 		xhr.addEventListener("readystatechange", function () {
+
 			if (this.readyState === 4) {
-				alert(this.responseText);
+				let items=JSON.parse(this.responseText);
+				let markers=[];
+				t.setState({ marker: items })
+
+				items.map(item=>alert('alkio'))
 			}
 		});
 
-		xhr.open("GET", "http://192.168.99.100/api/oBackEnd/webresources/generic");
+		xhr.open("GET", "http://192.168.99.100/api/oBackEnd/webresources/checkpoint");
 		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.setRequestHeader("User-Agent", "PostmanRuntime/7.19.0");
+
 		xhr.setRequestHeader("Accept", "*/*");
 		xhr.setRequestHeader("Cache-Control", "no-cache");
-		xhr.setRequestHeader("Postman-Token", "b549e640-7eb8-43d1-ae0f-a8e86aeafe32,1d038556-5fd6-494e-a550-f08bcb19240f");
-		xhr.setRequestHeader("Host", "192.168.99.100");
+	        xhr.setRequestHeader("Host", "192.168.99.100");
 		xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
 		xhr.setRequestHeader("Content-Length", "27");
 		xhr.setRequestHeader("Connection", "keep-alive");
@@ -38,16 +49,21 @@ export default class ShowRoutes extends React.Component {
 	}
 
 	show(e) {
-		alert('moi')
+		alert('mo2i')
 	}
-	render() {
+	render()  {
+		alert('12jesjeswww='  + this.state.marker)
+	
+		if(this.state.marker=='-')
+			return (<p>Test</p>)
 
+		
 		return (
 			<div class="row">
 				<div class="col-sm-4">
 					<div>
 						<h1>Näytä reitti</h1>
-						<Map1/>	
+						<Map1  test={this.state.marker}/>	
 						<select class="form-control" id="sel1">
 							<option hidden >1Choose route1</option>
 							<option>1</option>
