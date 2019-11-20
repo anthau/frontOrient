@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -25,11 +26,21 @@ export default class Map1  extends React.Component   {
 		super(props);
 
 		let text=[];
-		
-		this.props.test.map(point=>      text.push(
-			<div key={1}>
-                        <TextPath
-                         positions={[[point.lat -  0.001 , point.lon-0.0015] , [point.lat - 0.001, point.lon + 0.0015]]} 
+		let itemCounter=0;  
+                let  point_x=0;
+                let  point_y=0;
+		try  {
+                     point_x =this.props.test[0].lat;
+		     point_y=this.props.test[0].lon;
+                } catch(e)  {
+                } 
+
+		alert(JSON.stringify(this.props.test))
+		this.props.test.map(point=>  {      
+			text.push(
+                       	<div key={1}>
+			 <TextPath
+                         positions={[[point.lat -  0.0005 , point.lon-0.0015] , [point.lat - 0.0005, point.lon + 0.0015]]} 
                          text={point.name}
                          center
                          Below
@@ -37,15 +48,39 @@ export default class Map1  extends React.Component   {
                         key={1}
                         /><CircleMarker  key={1} center={[point.lat, point.lon]}/>
 			</div>
-                ))
+                )
 
 
+	
+ 			itemCounter++;
+		 }
+
+		)
+             
+		this.props.test.slice(1).map(point2=> 
+                  { alert('uusi');text.push(
+                        <div key={1}>
+                         <TextPath
+                         positions={[[point_x , point_y] , [point2.lat, point2.lon ]]}
+                         text=""
+                         center
+                         Below
+                         offset={10}
+                        key={1}
+                        />
+                          </div> 
+                );
+                   point_x=point2.lat;
+		   point_y=point2.lon; 
+		 }
+		);
+
+   
 		this.state = {points: text};
 
 	}	
 	
 	render()  {
-		alert('moi3='  + this.props.test)
 
 		const position = [0, 0]
 
@@ -60,9 +95,9 @@ export default class Map1  extends React.Component   {
             					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             					attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           					/>
+						<div>
 						{this.state.points}
-				  <CircleMarker center={[10,10]}/>
-				  <CircleMarker center={[30,120]}/>
+						</div>
           	
         		</Map>
 
