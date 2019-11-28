@@ -1,9 +1,7 @@
 
 
 import React from 'react';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import { Map, Marker, CircleMarker,Popup, TileLayer } from 'react-leaflet'
+import { Map, CircleMarker, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import './../App.css';
 import L from 'leaflet';
@@ -12,7 +10,6 @@ import TextPath from 'react-leaflet-textpath';
 
 delete L.Icon.Default.prototype._getIconUrl;
 
-const position = [51.505, -0.09]
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
@@ -26,7 +23,7 @@ export default class Map1  extends React.Component   {
 		super(props);
 
 		let text=[];
-		let itemCounter=0;  
+	 
                 let  point_x=0;
                 let  point_y=0;
 		try  {
@@ -48,11 +45,9 @@ export default class Map1  extends React.Component   {
                         key={1}
                         /><CircleMarker  key={1} center={[point.lat, point.lon]}/>
 			</div>
-                )
+                );
+                     return 2;
 
-
-	
- 			itemCounter++;
 		 }
 
 		)
@@ -72,7 +67,8 @@ export default class Map1  extends React.Component   {
                 );
                    point_x=point2.lat;
 		   point_y=point2.lon; 
-		 }
+		   return 2; 
+		}
 		);
 
    
@@ -83,9 +79,7 @@ export default class Map1  extends React.Component   {
 	render()  {
 
 		const position = [0, 0]
-
-		const coord = [30, 10]
-		var latlng1 = L.latLng(50.5, 30.5);
+		
 	   	return(
 			<div>
 

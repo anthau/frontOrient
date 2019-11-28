@@ -1,7 +1,5 @@
 import React from 'react'
-import $ from "jquery";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
 import './../App.css'
 import Map1 from './../Map';
 
@@ -27,8 +25,8 @@ export default class ShowRoutes extends React.Component {
 		xhr.addEventListener("readystatechange", function () {
 
 			if (this.readyState === 4) {
-				let items=JSON.parse(this.responseText);
-				let markers=[];
+			        alert("testilataus=" + this.responseText)	
+                               let items=JSON.parse(this.responseText);
 				t.setState({ marker: items })
 
 				items.map(item=>alert('alkio'))
@@ -54,7 +52,7 @@ export default class ShowRoutes extends React.Component {
 	render()  {
 		alert('12jesjeswww='  + this.state.marker)
 	
-		if(this.state.marker=='-')
+		if(this.state.marker==='-')
 			return (<p>Test</p>)
 
 		

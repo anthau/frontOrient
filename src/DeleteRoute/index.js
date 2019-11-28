@@ -23,9 +23,7 @@ class DeleteRoute extends React.Component {
     		this.getCities();
 	    	     
   }
-  componentDidMount()  {
-
-  
+  componentDidMount()  {  
   
   }
   
@@ -89,13 +87,11 @@ class DeleteRoute extends React.Component {
   			}}
   			
   			var t=this;
-  			var term=[];
 			
 			$.ajax(settings).done(function (response) {
 				let result = response.filter(route => route.city ===t.city1.current.value).filter(route => route.map ===t.map2.current.value);
 				alert(JSON.stringify(result ))
 				let routesArray=[ <option value="" selected disabled hidden>Route</option>];
- 				let check=[];
 				result.map(route=>routesArray.push(<option value={route.id}  >{route.name}</option>));
 				t.setState({ routes : routesArray});
 
@@ -111,8 +107,8 @@ class DeleteRoute extends React.Component {
    
    }
    filterRoutesCity(e)  {
-    	alert("poistetaan3=" + "kaupunki="  + this.city1.current.value +  " map="+ this.map2.current.value  + "Reitti="  + this.deleteUusi.current.value )
-    this.setState({ routes : []});
+    	alert("poistetaan3=" )
+    	this.setState({ routes : []});
       	var settings = {
 			"crossDomain": true,
   			"url": "http://192.168.99.100/api/oBackEnd/webresources/generic",
@@ -123,18 +119,19 @@ class DeleteRoute extends React.Component {
   			}}
   			
   			var t=this;
-  			var term=[];
 			
 			$.ajax(settings).done(function (response) {
 				let result = response.filter(route => route.city ===t.city1.current.value);
-				//alert(JSON.stringify(new Set(Object.keys(result )))
+				
  				let routesArray=[ <option value="" selected disabled hidden>Select map</option>];
  				let check=[];
 				result.map(route=>{
 									if(check.indexOf(route.map)<0)
 										routesArray.push(<option value={route.map} key="1" >{route.map}</option>)
 									check.push(route.map)
+									return 1;
 								}
+								
 							)
 				t.setState({ maps1  : routesArray});
 			});

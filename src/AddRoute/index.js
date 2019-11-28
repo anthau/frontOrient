@@ -1,5 +1,4 @@
 import React from 'react'
-import $ from "jquery";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button,Form} from 'react-bootstrap';
 import './../App.css'
