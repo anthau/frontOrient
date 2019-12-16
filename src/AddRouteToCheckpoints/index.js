@@ -39,6 +39,7 @@ export default class AddRouteToCheckpoints extends React.Component {
 
 	saveData(e) {
 	
+		alert('sends data forward')
 
 	}
 
@@ -58,7 +59,7 @@ export default class AddRouteToCheckpoints extends React.Component {
 							<option selected>Select route </option>
 
 							<Fetch
-								loader={<p>lataa</p>} // Replace this with your lovely handcrafted loader
+								loader={<p>lataa tietoja</p>} // Replace this with your lovely handcrafted loader
 								url="http://192.168.99.100/api/oBackEnd/webresources/generic"
 								timeout={5000}
 							>
@@ -77,7 +78,7 @@ export default class AddRouteToCheckpoints extends React.Component {
 					<div class="col-sm-3">
 						<select class="browser-default custom-select">
 							<option selected>Select checkpoint from route</option>
-							<option value="1">One</option>
+							
 							<Fetch
 								loader={<p>lataa</p>} // Replace this with your lovely handcrafted loader
 								url="http://192.168.99.100/api/oBackEnd/webresources/checkpoint"

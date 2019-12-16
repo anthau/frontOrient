@@ -2,6 +2,71 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './../App.css'
 import Map1 from './../Map';
+import { Fetch } from 'react-data-fetching'
+/**Todoo. Käännö karttadata kartan ymmärtämmän muotoon- */
+/**integroi kartta */
+const axios = require('axios');
+const uniqid = require('uniqid');
+
+class Test1 extends React.Component {
+	data = {};
+	constructor(props) {
+		super(props);
+		this.state = {
+			x: this.props.url
+		}
+	}
+
+	render() {
+		alert(JSON.stringify(this.props))
+		return (<p>i</p>)
+	}
+}
+
+class MapData extends React.Component {
+	data = {};
+	constructor(props) {
+		super(props);
+		this.state = {
+			x: this.props.url
+		}
+	}
+
+
+	render() {
+
+		return (<Fetch
+			loader={<p>loader</p>} // Replace this with your lovely handcrafted loader
+			url={this.props.url}
+			timeout={5000}
+		>
+			{({ data }) => (<Map1 key={uniqid()}  route={this.props.route} Checkpoints={data}  />) }
+		</Fetch>)
+		return;
+	}
+
+}
+
+/**Reads data from  url and reurhns  */
+class ShowRoutes1 extends React.Component {
+	data = {};
+	constructor(props) {
+		super(props);
+		this.state = {
+			data1: '-',
+			didUpdate: false
+
+		};
+
+		alert('init2')
+
+
+	}
+
+
+
+
+}
 
 export default class ShowRoutes extends React.Component {
 
@@ -9,42 +74,18 @@ export default class ShowRoutes extends React.Component {
 		super(props);
 
 		this.state = {
-			marker: '-'
-
+			marker: 'w',
+			chooseRoute: 1
 		};
-
 	}
 
 	componentDidMount() {
 
-		var data = JSON.stringify({});
-		var xhr = new XMLHttpRequest();
-		xhr.withCredentials = true;
-		var t = this;
 
-		xhr.addEventListener("readystatechange", function () {
-
-			if (this.readyState === 4) {
-				alert("Tiedot ladattu")
-				let items = JSON.parse(this.responseText);
-				t.setState({ marker: items })
-			}
-		});
-
-		xhr.open("GET", "http://192.168.99.100/api/oBackEnd/webresources/checkpoint");
-		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.setRequestHeader("Accept", "*/*");
-		xhr.setRequestHeader("Cache-Control", "no-cache");
-		xhr.setRequestHeader("Host", "192.168.99.100");
-		xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
-		xhr.setRequestHeader("Content-Length", "27");
-		xhr.setRequestHeader("Connection", "keep-alive");
-		xhr.setRequestHeader("cache-control", "no-cache");
-		xhr.send(data);
 	}
 
 	show(e) {
-		alert('mo2i')
+		this.setState({ chooseRoute: e.target.value })
 	}
 
 	render() {
@@ -52,19 +93,32 @@ export default class ShowRoutes extends React.Component {
 		if (this.state.marker === '-')
 			return (<p>Loading .... </p>)
 
+		let routeID = this.state.chooseRoute
+		let mouse = {}
+		const url1 = "http://192.168.99.100/api/oBackEnd/webresources/details/" + this.state.chooseRoute;
+		var t = this;
+		var x = 2;
+		var y = 3;
 
 		return (
 			<div class="row">
 				<div class="col-sm-4">
 					<div>
-						<h1>Näytä1 reitti</h1>
-						<Map1 test={this.state.marker} />
-						<select class="form-control" id="sel1">
-							<option hidden >1Choose route1</option>
-							<option>1</option>
-							<option>2</option>
+						<h1> tes12</h1>
+						<MapData url={url1} key={uniqid()} route={this.state.chooseRoute} render={(data) => <div>{
+						
+						alert('tappara 12on!=' + data)}
+
+							<p> uusi1{url1}</p></div>
+						}
+						/>
+
+						<select ref={this.routeRef} onChange={this.show.bind(this)}>
+							<option value="1"> helppo kolmonen</option>
+							<option value="2"> vaikea viitonen</option>
+
 						</select>
-						<button type="button" onClick={this.show} class="btn btn-primary">Show rutes </button>
+
 					</div>
 				</div>
 			</div>
