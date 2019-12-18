@@ -13,6 +13,7 @@ import DeleteRoute from  './DeleteRoute'
 import ShowRoutes from  './ShowCheckpoints'
 import AddRouteToCheckpoints from  './AddRouteToCheckpoints'
 
+
 import {
   BrowserRouter as Router,  
   Route,  
@@ -20,10 +21,10 @@ import {
 
 import * as serviceWorker from './serviceWorker';
 
-
 function Ex() {
 return (
   <Router>
+
     <div>
       <Route path="/test" component={Welcome} />
     </div>

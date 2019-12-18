@@ -2,7 +2,6 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
 import './../App.css'
-import { Fetch } from 'react-data-fetching'
 
 import Logo from "./image.svg";
 class AddRoute extends React.Component {
