@@ -124,7 +124,7 @@ export default class AddCheckpoint extends React.Component {
 	}
 
 	saveCoord(e) {
-
+		alert("Coordinates are saved");
 		const { lat, lng } = e.latlng;
 		this.lat = lat;
 		this.lon = lng;

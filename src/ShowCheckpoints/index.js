@@ -53,7 +53,7 @@ export default class ShowRoutes extends React.Component {
 	}
 
 	show(e) {
-		alert('jes')
+	
 		this.setState({ chooseRoute: e.target.value })
 	}
 
