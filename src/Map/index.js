@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Map, CircleMarker, TileLayer } from 'react-leaflet'
+import { Map, CircleMarker, TileLayer,Tooltip } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import './../App.css';
 import L from 'leaflet';
@@ -25,7 +25,6 @@ class DrawMapLines extends React.Component {
 	render() {
 
 		const pointData = this.props.data;
-
 		try {
 			let lat = pointData[0][4]
 			let lon = pointData[0][5]
@@ -81,7 +80,10 @@ export default class Map1 extends React.Component {
 		const data1 = this.props.Checkpoints;
 		let items1 = [];
 		try {
-			data1.map(point => items1.push(<CircleMarker key={1} center={[point[4], point[5]]} />))
+			data1.map(point => items1.push(<CircleMarker key={1}  center={[point[4], point[5]]} >
+					 <Tooltip>  { point[6]  }</Tooltip> 
+				</CircleMarker>
+				))
 		} catch (e) {
 
 		}
