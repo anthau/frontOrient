@@ -9,6 +9,7 @@ import { Fetch } from 'react-data-fetching'
 import $ from "jquery";
 
 
+
 delete L.Icon.Default.prototype._getIconUrl;
 
 const position = [51.505, -0.09]
@@ -71,7 +72,7 @@ export default class AddCheckpoint extends React.Component {
 
 			buttons: [
 				{
-					label: 'Send 1data',
+					label: 'Send data',
 					onClick: () => {
 
 						this.sendData();
@@ -132,7 +133,7 @@ export default class AddCheckpoint extends React.Component {
 
 			buttons: [
 				{
-					label: 'Send1data',
+					label: 'Send data',
 					onClick: () => {
 
 						this.sendData();
@@ -155,7 +156,7 @@ export default class AddCheckpoint extends React.Component {
 		const { lat, lng } = e.latlng;
 		this.lat = lat;
 		this.lon = lng;
-		this.markers.push(<Marker key="1" position={position}><Popup>3-4</Popup></Marker>)
+		this.markers.push(<Marker key="1" position={position}><Popup></Popup></Marker>)
 		this.selected = "card card1"
 		this.forceUpdate();
 	}
