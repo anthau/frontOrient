@@ -109,32 +109,22 @@ class DeleteRoute extends React.Component {
 
 
 	deleteRoute1() {
-		alert("poistetaan401=" + + this.deleteUusi.current.value)
 
-		var settings = {
-			"async": true,
-			"crossDomain": true,
-			"url": "http://192.168.99.100/api/oBackEnd/webresources/generic/",
-			"method": "DELETE",
-			"headers": {
-				"Content-Type": "application/json",
-				"User-Agent": "PostmanRuntime/7.19.0",
-				"Accept": "*/*",
-				"Cache-Control": "no-cache",
-				"Postman-Token": "279b893d-7faa-4f88-abe5-5c0918d93625,9f057f87-250c-45ee-aa71-7c48f5f69c8c",
-				"Host": "192.168.99.100",
-				"Accept-Encoding": "gzip, deflate",
-				"Content-Length": "8",
-				"Connection": "keep-alive",
-				"cache-control": "no-cache"
-			},
-			"processData": false,
-			"data": "{\"id\":" + this.deleteUusi.current.value + "}"
-		}
+		var data = JSON.stringify({ "checkpointid": 301, "routeID": 451 });
+		var xhr = new XMLHttpRequest();
+		xhr.withCredentials = true;
 
-		$.ajax(settings).done(function (response) {
-			console.log(response);
+		xhr.addEventListener("readystatechange", function () {
+			if (this.readyState === 4) {
+				alert(this.responseText);
+			}
 		});
+
+		xhr.open("POST", "api/oBackEnd/webresources/details");
+		xhr.setRequestHeader("Content-Type", "application/json");
+
+		xhr.send(data);
+		alert('poisto=')
 
 	}
 	render() {

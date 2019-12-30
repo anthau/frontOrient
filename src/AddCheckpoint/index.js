@@ -5,6 +5,9 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import './../App.css';
 import L from 'leaflet';
+import { Fetch } from 'react-data-fetching'
+import $ from "jquery";
+
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -17,6 +20,12 @@ L.Icon.Default.mergeOptions({
 });
 
 export default class AddCheckpoint extends React.Component {
+	constructor(props) {
+
+		super(props);
+
+		this.checkpointRef = React.createRef();
+	}
 	lat = "-";
 	lon = "-";
 	name = React.createRef();
@@ -81,6 +90,24 @@ export default class AddCheckpoint extends React.Component {
 
 
 
+	}
+	deleteCheckpoint(e) {
+
+	
+		var settings = {
+			"url": "api/oBackEnd/webresources/checkpoint",
+			"method": "POST",
+			"timeout": 0,
+			"headers": {
+			  "Content-Type": "application/json"
+			},
+			"data": JSON.stringify({"id":this.checkpointRef.current.value,"lat":0,"lon":0,"name":""}),
+		  };
+		  
+		  $.ajax(settings).done(function (response) {
+			alert('response');
+		  });
+		
 	}
 	setCheckpoint(e) {
 
@@ -153,6 +180,30 @@ export default class AddCheckpoint extends React.Component {
 						</div>
 					</form>
 					<button type="button" onClick={this.setCheckpoint.bind(this)} class="btn btn-primary">Set Checkpoint</button>
+		
+
+					<div class="row">
+					<div class="col-sm-3">
+						<select class="browser-default custom-select"  ref={this.checkpointRef}>
+							<option selected>Select checkpoint from route</option>
+
+							<Fetch
+								loader={<p>loading</p>} // Replace this with your lovely handcrafted loader
+								url="api/oBackEnd/webresources/checkpoint"
+								timeout={5000}
+							>
+								{({ data }) => data.map(checkpoint =>
+									<option value={checkpoint.id}>{checkpoint.name} </option>
+
+								)}
+							</Fetch>
+						</select>
+						
+
+					</div>
+				</div>
+					<button type="button" onClick={this.deleteCheckpoint.bind(this)} class="btn btn-primary">Delete Checkpoint</button>
+		
 				</div>
 
 			</div>

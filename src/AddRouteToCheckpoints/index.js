@@ -38,7 +38,7 @@ export default class AddRouteToCheckpoints extends React.Component {
 	}
 
 	saveData(e) {
-		
+		   
 		var settings = {
 			"async": true,
 			"crossDomain": true,
@@ -55,6 +55,30 @@ export default class AddRouteToCheckpoints extends React.Component {
 		  
 		  $.ajax(settings).done(function (response) {
 			alert('sends data forward=' + response )
+		  });
+
+	
+
+	}
+
+	deleteData(e) {
+		   
+		var settings = {
+			"async": true,
+			"crossDomain": true,
+			"url": "api/oBackEnd/webresources/details",
+			"method": "POST",
+			"headers": {
+			  "Content-Type": "application/json",
+			  "cache-control": "no-cache",
+			  "Postman-Token": "1ce1ca17-d91f-40ad-836f-520d0e589b2e"
+			},
+			"processData": false,
+			"data": "{\"checkpointid\" : " +this.checkpointRef.current.value + ",\"routeID\" :" + this.routeRef.current.value +"}"
+		  }
+		  
+		  $.ajax(settings).done(function (response) {
+			alert('sends data delete=' + response )
 		  });
 
 	
@@ -108,8 +132,9 @@ export default class AddRouteToCheckpoints extends React.Component {
 								)}
 							</Fetch>
 						</select>
-
+						
 						<Button onClick={this.saveData.bind(this)} variant="primary" type="submit">Add checkpoint to route</Button>
+						<Button onClick={this.deleteData.bind(this)} variant="primary" type="submit">Delete checkpoint to route</Button>
 					</div>
 				</div>
 			</div>
