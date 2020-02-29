@@ -80,7 +80,10 @@ export default class Map1 extends React.Component {
 		const data1 = this.props.Checkpoints;
 		let items1 = [];
 		try {
-			data1.map(point => items1.push(<CircleMarker key={1}  center={[point[4], point[5]]} >
+			data1.map(point => items1.push(<CircleMarker
+				key={1}
+				center={[point[4], point[5]]}
+			>
 					 <Tooltip>  { point[6]  }</Tooltip> 
 				</CircleMarker>
 				))

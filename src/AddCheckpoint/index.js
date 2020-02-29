@@ -51,7 +51,7 @@ export default class AddCheckpoint extends React.Component {
 			}
 		});
 
-		xhr.open("PUT", "http://192.168.99.100/api/oBackEnd/webresources/checkpoint");
+		xhr.open("PUT", "api/oBackEnd/webresources/checkpoint");
 		xhr.setRequestHeader("Content-Type", "application/json");
 		xhr.setRequestHeader("Accept", "*/*");
 		xhr.setRequestHeader("Cache-Control", "no-cache");

@@ -31,7 +31,7 @@ class DeleteRoute extends React.Component {
 	getMaps() {
 		var settings = {
 			"crossDomain": true,
-			"url": "http://192.168.99.100/api/oBackEnd/webresources/generic/Maps",
+			"url": "api/oBackEnd/webresources/generic/Maps",
 			"method": "GET",
 			"headers": {
 				"Content-Type": "application/json",
@@ -53,7 +53,7 @@ class DeleteRoute extends React.Component {
 	getCities() {
 		var settings = {
 			"crossDomain": true,
-			"url": "http://192.168.99.100/api/oBackEnd/webresources/generic/cities",
+			"url": "api/oBackEnd/webresources/generic/cities",
 			"method": "GET",
 			"headers": {
 				"Content-Type": "application/json",
@@ -80,7 +80,7 @@ class DeleteRoute extends React.Component {
 		this.setState({ routes: [] });
 		var settings = {
 			"crossDomain": true,
-			"url": "http://192.168.99.100/api/oBackEnd/webresources/generic",
+			"url": "api/oBackEnd/webresources/generic",
 			"method": "GET",
 			"headers": {
 				"Content-Type": "application/json",
@@ -144,7 +144,7 @@ class DeleteRoute extends React.Component {
 						<option value="" selected disabled hidden>Select City</option>
 						<Fetch
 							loader={<p>lataa tietoja</p>} // Replace this with your lovely handcrafted loader
-							url="http://192.168.99.100/api/oBackEnd/webresources/generic/cities"
+							url="api/oBackEnd/webresources/generic/cities"
 							timeout={5000}
 						>
 							{({ data }) => Object.values(data).map(route =>
@@ -158,7 +158,7 @@ class DeleteRoute extends React.Component {
 						<option value="" selected disabled hidden>Select Map</option>
 						<Fetch
 							loader={<p>lataa tietoja</p>} // Replace this with your lovely handcrafted loader
-							url="http://192.168.99.100/api/oBackEnd/webresources/generic/Maps"
+							url="api/oBackEnd/webresources/generic/Maps"
 							timeout={5000}
 						>
 							{({ data }) => Object.values(data).map(route =>
@@ -168,14 +168,26 @@ class DeleteRoute extends React.Component {
 						</Fetch>
 					</select>
 
-					<select class="browser-default custom-select" ref={this.deleteUusi} >
-						<option value="" selected disabled hidden>Route</option>
+					<select
+						class="browser-default custom-select"
+						ref={this.deleteUusi
+						} >
+						<option
+							value=""
+							selected
+							disabled
+							hidden
+						>Route</option>
 						{this.state.routes}
 
 					</select>
 
 
-					<Button variant="danger" onClick={this.deleteRoute1.bind(this)} type="submit">
+					<Button
+						variant="danger"
+						onClick={this.deleteRoute1.bind(this)}
+						type="submit"
+					>
 						Delete route
   	  </Button>
 

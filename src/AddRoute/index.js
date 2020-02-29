@@ -30,8 +30,9 @@ class AddRoute extends React.Component {
 		xhr.addEventListener("readystatechange", function () {
 
 			if (this.readyState === 4) {
-
+				alert(this.responseText)
 				let routes = JSON.parse(this.responseText)
+
 				let keys = [];
 
 
@@ -48,13 +49,12 @@ class AddRoute extends React.Component {
 		});
 
 		//Gets the select box information
-		xhr.open("GET", "http://192.168.99.100/api/oBackEnd/webresources/generic");
+		xhr.open("GET", "api/oBackEnd/webresources/generic");
 		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.setRequestHeader("User-Agent", "PostmanRuntime/7.18.0");
+		
 		xhr.setRequestHeader("Accept", "*/*");
 		xhr.setRequestHeader("Cache-Control", "no-cache");
-		xhr.setRequestHeader("Postman-Token", "f73441d8-4e76-4279-88bf-b3b41f61c033,f08ded73-7f78-4202-a38f-4649b13fa2af");
-		xhr.setRequestHeader("Host", "192.168.99.100");
+
 		xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
 		xhr.setRequestHeader("Content-Length", "38");
 		xhr.setRequestHeader("Connection", "keep-alive");
@@ -66,7 +66,7 @@ class AddRoute extends React.Component {
 
 	send(e) {
 
-		alert(this.textRoute.current.value);
+		
 		var data = JSON.stringify({
 			"name": this.textRoute.current.value,
 			"city": this.textInput.current.value,
@@ -79,18 +79,18 @@ class AddRoute extends React.Component {
 
 		xhr.addEventListener("readystatechange", function () {
 			if (this.readyState === 4) {
-
-				alert(this.responseText);
+				alert("Moi")
+				
 			}
 		});
 
-		xhr.open("PUT", "http://192.168.99.100/api/oBackEnd/webresources/generic");
+		xhr.open("PUT", "api/oBackEnd/webresources/generic");
 		xhr.setRequestHeader("Content-Type", "application/json");
-		xhr.setRequestHeader("User-Agent", "PostmanRuntime/7.18.0");
+
 		xhr.setRequestHeader("Accept", "*/*");
 		xhr.setRequestHeader("Cache-Control", "no-cache");
-		xhr.setRequestHeader("Postman-Token", "f73441d8-4e76-4279-88bf-b3b41f61c033,f08ded73-7f78-4202-a38f-4649b13fa2af");
-		xhr.setRequestHeader("Host", "192.168.99.100");
+
+
 		xhr.setRequestHeader("Accept-Encoding", "gzip, deflate");
 		xhr.setRequestHeader("Content-Length", "38");
 		xhr.setRequestHeader("Connection", "keep-alive");
@@ -135,14 +135,13 @@ class AddRoute extends React.Component {
 								<b>Add City</b>
 								<hr />
 							</Form.Text>
-
-
-
-
-
 						</Form.Group>
 					</Form>
-					<Button variant="primary" onClick={this.send.bind(this)} type="submit">
+					<Button
+						variant="primary"
+						onClick={this.send.bind(this)}
+						type="submit"
+					>
 						Add routes
   </Button>
 					<br />

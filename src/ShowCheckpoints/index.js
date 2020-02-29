@@ -62,7 +62,7 @@ export default class ShowRoutes extends React.Component {
 		if (this.state.marker === '-')
 			return (<p>Loading .... </p>)
 
-		const url1 = "http://192.168.99.100/api/oBackEnd/webresources/details/" + this.state.chooseRoute;
+		const url1 = "api/oBackEnd/webresources/details/" + this.state.chooseRoute;
 
 
 
@@ -77,8 +77,8 @@ export default class ShowRoutes extends React.Component {
 						<select ref={this.routeRef} onChange={this.show.bind(this)} >
 
 							<Fetch
-								loader={<p>loader</p>} // Replace this with your lovely handcrafted loader
-								url="http://192.168.99.100/api/oBackEnd/webresources/generic"
+								loader={<p>loader</p>} 
+								url="api/oBackEnd/webresources/generic"
 								timeout={5000}
 							>
 								{({ data }) => (	data.map(route=> <option value={route.id}>{route.name}</option>))}
